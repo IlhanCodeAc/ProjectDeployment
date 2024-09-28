@@ -6,7 +6,6 @@ import 'swiper/css/autoplay';
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Mainswiper from './_components/Swipers/Mainswiper';
-import { Product } from '@prisma/client';
 import { Cards } from './_components/productCards/cards';
 import prisma from './lib/db';
 
