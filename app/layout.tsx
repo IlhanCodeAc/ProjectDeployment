@@ -8,11 +8,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "@uploadthing/react/styles.css";
  
  
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) 
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
