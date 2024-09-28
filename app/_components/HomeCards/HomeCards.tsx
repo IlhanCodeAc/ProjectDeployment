@@ -1,8 +1,6 @@
 "use client"
 
-import prisma from '@/app/lib/db';
 import React from 'react';
-import style from './style.module.scss';
 import { Container } from '@mui/material';
 
 export default  function Homecards(){

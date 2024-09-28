@@ -1,6 +1,6 @@
 "use server";
 
-import { Prisma, Product } from "@prisma/client";
+import {  Product } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import prisma from "../lib/db";
 import Swal from "sweetalert2";

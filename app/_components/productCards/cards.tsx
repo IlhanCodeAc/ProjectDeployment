@@ -3,7 +3,6 @@ import React from 'react';
 import style from './style.module.scss';
 import { Container } from '@mui/material';
 import Link from 'next/link';
-import DeleteButton from '../Delete/Delete';
 import { Product } from '@prisma/client';
 
 type Props = {

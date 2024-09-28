@@ -1,11 +1,7 @@
 import React from "react";
 import GetByID from "@/app/actions/products";
-import { YouTubeEmbed } from "@next/third-parties/google";
 import { Container } from "@mui/material";
 import style from "./style.module.scss";
-import Link from "next/link";
-import { deleteProduct } from "@/app/(actions)/product";
-import Delete from "@/app/_components/Delete/Delete";
 import DeleteButton from "@/app/_components/Delete/Delete";
 
 const Page = async ({ params }: { params: { id: string } }) => {
@@ -14,9 +10,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
   try {
     product = await GetByID({ params });
   } catch (error) {
-    return <h2>You've got an errro X-X</h2>;
+    return <h2>You ve got an errro X-X</h2>;
   }
-  const videoId = product.gameplayVideo;
 
   return (
     <>

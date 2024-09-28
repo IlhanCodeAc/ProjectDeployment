@@ -17,16 +17,7 @@ import { UploadButton } from "@/src/utils/uploadthing";
 import { Product } from "@prisma/client";
 import Swal from "sweetalert2";
 
-interface FormData {
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  sliderImageOne: string;
-  sliderImageTwo: string;
-  sliderImageThree: string;
-  gameplayVideo: string;
-}
+
 
 const Page = () => {
   const { register, handleSubmit, control, setValue } = useForm<Product>();

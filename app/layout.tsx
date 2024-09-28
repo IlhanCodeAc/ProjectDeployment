@@ -6,10 +6,7 @@ import Header from "./_components/Header/header";
 import Footer from "./_components/Footer/footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import "@uploadthing/react/styles.css";
-import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
-import { extractRouterConfig } from "uploadthing/server";
  
-import { ourFileRouter } from "@/app/api/uploadthing/core";
  
 export default function RootLayout({
   children,

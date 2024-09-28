@@ -5,22 +5,14 @@ import style from './styles.module.scss'
 import { Container } from '@mui/material'
 import Image from 'next/image';
 import phoenixLogo from './372-3728490_red-and-black-b-logo-gaming-logos-red.png';
-import { Unlock } from 'next/font/google'
 import Link from 'next/link';
-import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
-// import Swiper and modules styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { UserButton } from '@clerk/nextjs';
-import Dropdown from '../Dropdown/Dropdown';
 
 
-const unlock = Unlock({
-    subsets: ['latin'],
-    weight: '400', 
-});
+
 
 
 
