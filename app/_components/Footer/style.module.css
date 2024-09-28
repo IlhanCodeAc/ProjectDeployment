@@ -1,0 +1,25 @@
+.footerCont {
+  background-color: #dcd3d2;
+  height: 100%;
+  padding: 5%;
+  transform: translate(0, 100%);
+  box-shadow: 1px 3px 36px -14px rgb(186, 186, 186);
+}
+.footerCont .leftFooter {
+  border-top: 2px solid #FCF6F5;
+  border-bottom: 2px solid #FCF6F5;
+}
+.footerCont .leftFooter .FooterMainText {
+  color: black;
+  font-family: sans-serif;
+  background-color: #e5e2e1;
+  padding: 5px;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 15px;
+}
+.footerCont .leftFooter .FooterText {
+  font-family: sans-serif;
+  margin-bottom: 15px;
+  text-align: center;
+}/*# sourceMappingURL=style.module.css.map */

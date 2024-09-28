@@ -1,0 +1,47 @@
+.NavContainer{
+    display: flex;
+    -webkit-box-shadow: 1px 3px 36px -14px rgba(186,186,186,1);
+-moz-box-shadow: 1px 3px 36px -14px rgba(186,186,186,1);
+box-shadow: 1px 3px 36px -14px rgba(186,186,186,1);
+padding: 15px;
+position: sticky;
+bottom: 0;
+width: 100%;
+z-index: 999;
+.nav{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+.NavLeft{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    gap: 10px;
+    &:active,&:visited{
+        color: black;
+    }
+    .LogoName{
+        font-size: 24px;
+        font-family: "Unlock"!important;; 
+    }   
+   
+}
+.Right{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.Right a {
+    font-size: 18px;
+    font-family: 'Unlock', sans-serif; 
+    text-decoration: none; 
+    color: black;
+}
+.Right a:focus {
+    color: red;
+}
+
+}
+}
