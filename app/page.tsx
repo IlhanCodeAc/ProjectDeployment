@@ -19,20 +19,19 @@ type Props = {
   };
 }
 
-const Home = async ({ products = [], searchParams }: Props) => {
+async function Home({ products, searchParams }: Props) {
   console.log(products);
-  const orderBy: Record<string, string> = {};
+  const orderBy: Record<string, SortOrder> = {};
   const sort = searchParams?.sort as SortOrder;
   
   if (sort) {
-      const searchKey = sort.split('-')[0];
-      const searchValue = sort.split('-')[1];
-      orderBy[searchKey] = searchValue;
+      const [searchKey, searchValue] = sort.split('-');
+      orderBy[searchKey] = searchValue as SortOrder; // Ensure it's cast correctly
   }
 
   console.log(orderBy);
   
-  const product = await prisma.product.findMany({
+  const fetchedProducts = await prisma.product.findMany({
       orderBy: orderBy 
   });
   
@@ -45,7 +44,7 @@ const Home = async ({ products = [], searchParams }: Props) => {
         <h2 className={style.NewDeals}>NEW DEALS</h2>
         
         {/* Use the fetched products instead of the initial products prop */}
-        <Cards products={product} />
+        <Cards products={fetchedProducts} />
       </Container>
     </>
   );
