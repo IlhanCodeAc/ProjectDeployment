@@ -25,6 +25,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",
     "sass": "^1.78.0",
+    "svix": "^1.36.0",
     "sweetalert2": "^11.14.1",
     "swiper": "^11.1.14",
     "uploadthing": "^7.0.2",
