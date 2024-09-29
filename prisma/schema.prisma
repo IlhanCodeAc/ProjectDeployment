@@ -7,6 +7,40 @@ generator client {
 
 }
 
+enum ROLE{
+  User
+  Admin
+}
+
+model user{
+  id String @id @default(cuid()) 
+  externalId String @unique
+  email String @unique
+  firstName String?
+  lastName String?
+  imageUrl String?
+  role ROLE @default(User)
+  Cart cart?
+
+}
+
+model cart{
+  id String @id @default(cuid())
+  user user @relation(fields: [userId],references: [id]) 
+  userId String @unique
+  items CartItem[]
+
+}
+
+model CartItem{
+  id String @id @default(cuid())
+  product Product @relation(fields: [productId],references: [id])
+  productId String
+  quantity Int
+   cart cart @relation(fields: [cartId], references: [id])
+  cartId String
+}
+
 model Product {
   id String @id @default(cuid())
   name String
@@ -17,6 +51,7 @@ model Product {
   sliderImageTwo String
   sliderImageThree String
   gameplayVideo String
+  cartItems CartItem[]
 }
 model HomeProducts{
   id String @id @default(cuid())

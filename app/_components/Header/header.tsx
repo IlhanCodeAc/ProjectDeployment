@@ -35,6 +35,7 @@ const Header = () => {
             </Link>
             <div className={style.Right}>
                 <Link href="/products">Games</Link>
+                <Link href="/Cart">Cart</Link>
                 <Link href="/Creation">Add new game</Link>
                 <UserButton/>
             </div>
