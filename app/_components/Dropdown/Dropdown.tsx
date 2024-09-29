@@ -14,7 +14,7 @@ export default function Dropdown() {
   const handleChange = ((event: SelectChangeEvent<string>) => {
     const selectedValue = event.target.value as string;
     setSortOrder(selectedValue);
-    
+        
     const query = selectedValue ? `?sort=price-${selectedValue}` : '';
     router.push(`/products${query}`); 
   })

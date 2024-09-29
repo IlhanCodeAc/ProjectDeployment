@@ -1,0 +1,14 @@
+.Addtocart{
+    background-color: rgba(171,25,0,1);
+    color: white;
+    border: 2px solid rgba(171,25,0,1) ;
+    transition: 0.3s;
+    padding: 10px;
+    border-radius: 4px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.Addtocart:hover{
+    background-color: white;
+    color: rgba(171,25,0,1);
+}

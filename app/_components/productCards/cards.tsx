@@ -4,6 +4,7 @@ import style from './style.module.scss';
 import { Container } from '@mui/material';
 import Link from 'next/link';
 import { Product } from '@prisma/client';
+import Addtocart from '../AddToCartBTN/Addtocart';
 
 type Props = {
     products: Product[]
@@ -24,7 +25,7 @@ export async function Cards({ products }: Props): Promise<React.JSX.Element> {
                                 <h2 className={style.ProductPrice}>{product.price}$</h2>
                             </div>
                             <div className={style.ProductButtons}>
-                                <button className={style.SendToCart}>Add To Cart</button>
+                                <Addtocart productId={product.id}/>
                                 <Link href={`/products/${product.id}`} className={style.readMoreCard}>
                                     Read More
                                 </Link>
