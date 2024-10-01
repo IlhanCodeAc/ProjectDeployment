@@ -22,6 +22,7 @@ model user{
   role ROLE @default(User)
   Cart cart?
 orders     Order[]
+  genre String
 }
 
 model cart{
