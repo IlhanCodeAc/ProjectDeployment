@@ -1,16 +1,18 @@
 import React from 'react';
 import 'swiper/css';
 import { Cards } from '../_components/productCards/cards';
-import Dropdown from '../_components/Dropdown/Dropdown';
+import Dropdown from '../_components/Dropdown/Dropdown'; // Keep the existing Dropdown for sorting
 import { SortOrder } from '@/types';
 import prisma from '../lib/db';
-import style from "./style.module.scss"
+import style from "./style.module.scss";
+import FilterCheckbox from '../_components/Filter/Filter';
 
 type Props = {
   searchParams?: {
     sort?: string;
-    page?: string; // Added page parameter
-    limit?: string; // Added limit parameter
+    page?: string; 
+    limit?: string; 
+    category?: string; // New filter for category
     [key: string]: string | undefined;
   };
 };
@@ -18,8 +20,7 @@ type Props = {
 const Product = async ({ searchParams }: Props) => {
   const orderBy: Record<string, string> = {};
   const sort = searchParams?.sort as SortOrder;
-  
-  // Default values
+
   const page = parseInt(searchParams?.page || '1', 10);
   const limit = parseInt(searchParams?.limit || '10', 10);
   
@@ -29,21 +30,24 @@ const Product = async ({ searchParams }: Props) => {
     orderBy[searchKey] = searchValue;
   }
 
-  console.log(orderBy);
+  // Handle multiple category filters
+  const categories = searchParams?.category ? searchParams.category.split(',') : [];
+  const categoryFilter = categories.length ? { category: { name: { in: categories } } } : {};
 
-  // Fetching products with pagination
   const products = await prisma.product.findMany({
+    where: categoryFilter,
     orderBy: orderBy,
     skip: (page - 1) * limit,
     take: limit,
   });
 
-  const totalProducts = await prisma.product.count(); // Get total count of products
-  const totalPages = Math.ceil(totalProducts / limit); // Calculate total pages
+  const totalProducts = await prisma.product.count({ where: categoryFilter });
+  const totalPages = Math.ceil(totalProducts / limit); 
 
   return (
     <>
       <Dropdown />
+      <FilterCheckbox />
 
       <Cards products={products} />
 
@@ -51,7 +55,7 @@ const Product = async ({ searchParams }: Props) => {
         {Array.from({ length: totalPages }, (_, index) => (
           <a 
             key={index + 1}
-            href={`?sort=${searchParams?.sort}&page=${index + 1}&limit=${limit}`}
+            href={`?sort=${searchParams?.sort}&page=${index + 1}&limit=${limit}&category=${searchParams?.category}`} // Preserve filters
             className={style.paginationBtn}
           >
             {index + 1}
