@@ -1,0 +1,30 @@
+.filterCheckbox{
+    font-family: sans-serif;
+    input{
+        padding: 3px;
+        margin-top: 3px;
+    }
+    input:checked{
+        accent-color: rgb(231, 44, 11);
+    }
+    .Buttons{
+        display: flex;
+        flex-direction: column;
+        Button{
+            padding: 5px;
+            background-color: rgba(171,25,0,1);
+            color: white;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            margin-top: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        Button:hover{
+            background-color: rgb(231, 44, 11);
+        }
+        a Button{
+            width: 100%;
+        }
+    }
+}

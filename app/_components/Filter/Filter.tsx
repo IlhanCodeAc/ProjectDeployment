@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import style from './style.module.scss';
+import { redirect } from 'next/navigation';
+import Link from 'next/link';
 
 const categories = ['FPS', 'RPG', 'Open World'];
 
@@ -36,12 +38,16 @@ const FilterCheckbox = () => {
               value={category}
               checked={selectedCategories.includes(category)}
               onChange={() => handleCheckboxChange(category)}
+              className={style.checkbox}
             />
             {category}
           </label>
         </div>
       ))}
+      <div className={style.Buttons}>
       <button onClick={handleApplyFilters}>Apply Filters</button>
+      <Link href={"/products"}><button>Reset Filters</button></Link>
+      </div>
     </div>
   );
 };

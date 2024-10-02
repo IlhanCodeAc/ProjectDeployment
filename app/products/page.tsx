@@ -6,6 +6,7 @@ import { SortOrder } from '@/types';
 import prisma from '../lib/db';
 import style from "./style.module.scss";
 import FilterCheckbox from '../_components/Filter/Filter';
+import Sidebar from '../_components/Sidebar/Sidebar';
 
 type Props = {
   searchParams?: {
@@ -46,9 +47,9 @@ const Product = async ({ searchParams }: Props) => {
 
   return (
     <>
-      <Dropdown />
-      <FilterCheckbox />
-
+      {/* <Dropdown /> */}
+      {/* <FilterCheckbox /> */}
+      <Sidebar/>
       <Cards products={products} />
 
       <div className={style.pagination}>
