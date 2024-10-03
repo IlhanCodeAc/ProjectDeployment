@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import { createProduct, getCategories } from "../(actions)/product"; // Ensure you have the getCategories function
+import { createProduct } from "../(actions)/product";
 import {
   Container,
   TextField,
@@ -10,45 +10,38 @@ import {
   Typography,
   Grid,
   Paper,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
 } from "@mui/material";
 import style from "./style.module.scss";
 import Image from "next/image";
 import { UploadButton } from "@/src/utils/uploadthing";
-import { Product, Category } from "@prisma/client"; // Ensure Category is imported
+import { Product } from "@prisma/client";
 import Swal from "sweetalert2";
+
+interface FormData {
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  sliderImageOne: string;
+  sliderImageTwo: string;
+  sliderImageThree: string;
+  gameplayVideo: string;
+}
 
 const Page = () => {
   const { register, handleSubmit, control, setValue } = useForm<Product>();
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string | undefined>();
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const categoriesData = await getCategories(); // Fetch categories from the database
-        setCategories(categoriesData);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-    fetchCategories();
-  }, []);
 
   const onSubmit = async (data: Product) => {
-    data.categoryId = selectedCategory; // Add the selected category ID to the data
+    console.log(data);
     try {
-      await createProduct(data);
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "Your product has been created",
+        title: "Your work has been saved",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 1500
       });
+      await createProduct(data); 
     } catch (error) {
       console.error("Error creating product:", error);
     }
@@ -106,9 +99,82 @@ const Page = () => {
                         </>
                       ) : (
                         <UploadButton
-                          endpoint="imageUploader"
+                          endpoint="imageUploader" 
                           onClientUploadComplete={(res) => {
                             const url = res[0]?.url;
                             if (url) {
                               setValue("image", url);
-                  
+                            }
+                          }}
+                        />
+                      )}
+                    </div>
+                  )}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Description"
+                  {...register("description", { required: true })}
+                  multiline
+                  rows={4}
+                  variant="outlined"
+                  required
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={4}>
+                <TextField
+                  fullWidth
+                  label="Slider Image 1 URL"
+                  {...register("sliderImageOne")}
+                  variant="outlined"
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={4}>
+                <TextField
+                  fullWidth
+                  label="Slider Image 2 URL"
+                  {...register("sliderImageTwo")}
+                  variant="outlined"
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={4}>
+                <TextField
+                  fullWidth
+                  label="Slider Image 3 URL"
+                  {...register("sliderImageThree")}
+                  variant="outlined"
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Gameplay Video URL"
+                  {...register("gameplayVideo")}
+                  variant="outlined"
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        </Paper>
+      </Container>
+    </div>
+  );
+};
