@@ -19,12 +19,19 @@ z-index: 999;
     cursor: pointer;
     text-decoration: none;
     gap: 10px;
+    @media screen and (max-width:800px) {
+        gap: 5px;
+
+}   
     &:active,&:visited{
         color: black;
     }
     .LogoName{
         font-size: 24px;
         font-family: "Unlock"!important;; 
+        @media screen and (max-width:800px) {
+            font-size: 18px;
+        }
     }   
    
 }
@@ -38,6 +45,9 @@ z-index: 999;
     font-family: 'Unlock', sans-serif; 
     text-decoration: none; 
     color: black;
+    @media screen and (max-width:800px) {
+        font-size: 14px;
+    }
 }
 .Right a:focus {
     color: red;

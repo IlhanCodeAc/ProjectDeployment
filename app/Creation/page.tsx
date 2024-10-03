@@ -15,7 +15,6 @@ import style from "./style.module.scss";
 import Image from "next/image";
 import { UploadButton } from "@/src/utils/uploadthing";
 import Swal from "sweetalert2";
-import CategorySelect from "../_components/CategoryDropdown/Categorydd";
 import { Product } from "@prisma/client";
 
 
