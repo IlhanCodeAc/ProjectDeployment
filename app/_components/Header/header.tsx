@@ -37,6 +37,7 @@ const Header = () => {
                 <Link href="/products">Games</Link>
                 <Link href="/Cart">Cart</Link>
                 <Link href="/Creation">Add new game</Link>
+                <Link href={"/sign-up"}>Sign Up</Link>
                 <UserButton/>
             </div>
             </div>

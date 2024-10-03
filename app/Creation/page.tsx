@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import { createProduct } from "../(actions)/product";
+import { createProduct } from "../(actions)/product"; // Ensure this is a client-safe import
 import {
   Container,
   TextField,
@@ -14,8 +14,9 @@ import {
 import style from "./style.module.scss";
 import Image from "next/image";
 import { UploadButton } from "@/src/utils/uploadthing";
-import { Product } from "@prisma/client";
 import Swal from "sweetalert2";
+import CategorySelect from "../_components/CategoryDropdown/Categorydd";
+
 
 interface FormData {
   name: string;
@@ -29,11 +30,12 @@ interface FormData {
 }
 
 const Page = () => {
-  const { register, handleSubmit, control, setValue } = useForm<Product>();
+  const { register, handleSubmit, control, setValue } = useForm<FormData>();
 
-  const onSubmit = async (data: Product) => {
+  const onSubmit = async (data: FormData) => {
     console.log(data);
     try {
+      await createProduct(data, FormData) 
       Swal.fire({
         position: "center",
         icon: "success",
@@ -41,9 +43,13 @@ const Page = () => {
         showConfirmButton: false,
         timer: 1500
       });
-      await createProduct(data); 
     } catch (error) {
       console.error("Error creating product:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   };
 
@@ -171,10 +177,13 @@ const Page = () => {
                   Submit
                 </Button>
               </Grid>
-            </Grid>
+             
+            </Grid> 
           </form>
         </Paper>
       </Container>
     </div>
   );
 };
+
+export default Page;

@@ -22,7 +22,6 @@ model user{
   role ROLE @default(User)
   Cart cart?
 orders     Order[]
-  genre String
 }
 
 model cart{
@@ -54,8 +53,8 @@ model Product {
   gameplayVideo String
   cartItems CartItem[]
   orderItems OrderItem[]
-  category    Category @relation(fields: [categoryId], references: [id])
-  categoryId  String
+  category    Category? @relation(fields: [categoryId], references: [id])
+  categoryId  String?
 }
 model HomeProducts{
   id String @id @default(cuid())

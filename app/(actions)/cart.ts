@@ -4,21 +4,16 @@ import { revalidatePath } from 'next/cache';
 import { auth } from '@clerk/nextjs/server';
 
 import prisma from '../lib/db';
-
+import { Category } from '@prisma/client';
 export async function getCart() {
   const { userId } = auth();
   if (!userId) throw new Error('No user ID found');
   const user = await prisma.user.findUnique({
-    where: {
-      externalId: userId,
-    },
-    include: {
-      Cart: true,
-    },
+    where: { externalId: userId },
+    include: { Cart: true },
   });
   if (!user?.Cart) throw new Error('No Cart found');
-
-  return user?.Cart;
+  return user.Cart;
 }
 
 export async function getCartWithItems() {
@@ -94,3 +89,17 @@ export async function removeFromCart({ cartItemId }: { cartItemId: string }) {
 
   revalidatePath("/");
 }
+export const getCategories = async (): Promise<Category[]> => {
+  try {
+    const categories = await prisma.category.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+    return categories as Category[];
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    throw new Error("Unable to fetch categories");
+  }
+};
