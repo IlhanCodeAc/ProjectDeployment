@@ -16,6 +16,7 @@ import Image from "next/image";
 import { UploadButton } from "@/src/utils/uploadthing";
 import Swal from "sweetalert2";
 import CategorySelect from "../_components/CategoryDropdown/Categorydd";
+import { Product } from "@prisma/client";
 
 
 interface FormData {
@@ -30,12 +31,11 @@ interface FormData {
 }
 
 const Page = () => {
-  const { register, handleSubmit, control, setValue } = useForm<FormData>();
+   const { register, handleSubmit, control, setValue } = useForm<Product>();
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: Product) => {
     console.log(data);
     try {
-      await createProduct(data, FormData) 
       Swal.fire({
         position: "center",
         icon: "success",
@@ -43,13 +43,9 @@ const Page = () => {
         showConfirmButton: false,
         timer: 1500
       });
+      await createProduct(data); 
     } catch (error) {
       console.error("Error creating product:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong!",
-      });
     }
   };
 
