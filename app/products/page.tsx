@@ -1,11 +1,9 @@
 import React from 'react';
 import 'swiper/css';
 import { Cards } from '../_components/productCards/cards';
-import Dropdown from '../_components/Dropdown/Dropdown'; // Keep the existing Dropdown for sorting
 import { SortOrder } from '@/types';
 import prisma from '../lib/db';
 import style from "./style.module.scss";
-import FilterCheckbox from '../_components/Filter/Filter';
 import Sidebar from '../_components/Sidebar/Sidebar';
 
 type Props = {
@@ -13,7 +11,7 @@ type Props = {
     sort?: string;
     page?: string; 
     limit?: string; 
-    category?: string; // New filter for category
+    category?: string;
     [key: string]: string | undefined;
   };
 };
@@ -23,7 +21,7 @@ const Product = async ({ searchParams }: Props) => {
   const sort = searchParams?.sort as SortOrder;
 
   const page = parseInt(searchParams?.page || '1', 10);
-  const limit = parseInt(searchParams?.limit || '10', 10);
+  const limit = 9; 
   
   if (sort) {
     const searchKey = sort.split('-')[0];
@@ -31,7 +29,6 @@ const Product = async ({ searchParams }: Props) => {
     orderBy[searchKey] = searchValue;
   }
 
-  // Handle multiple category filters
   const categories = searchParams?.category ? searchParams.category.split(',') : [];
   const categoryFilter = categories.length ? { category: { name: { in: categories } } } : {};
 
@@ -47,21 +44,20 @@ const Product = async ({ searchParams }: Props) => {
 
   return (
     <>
-      {/* <Dropdown /> */}
-      {/* <FilterCheckbox /> */}
-      <Sidebar/>
+      <Sidebar />
       <Cards products={products} />
 
       <div className={style.pagination}>
         {Array.from({ length: totalPages }, (_, index) => (
           <a 
             key={index + 1}
-            href={`?sort=${searchParams?.sort}&page=${index + 1}&limit=${limit}&category=${searchParams?.category}`} // Preserve filters
+            href={`?sort=${searchParams?.sort}&page=${index + 1}&limit=${limit}`} // Preserve filters
             className={style.paginationBtn}
           >
             {index + 1}
           </a>
         ))}
+
       </div>
     </>
   );

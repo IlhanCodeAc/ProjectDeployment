@@ -20,7 +20,6 @@ const Sidebar = () => {
         <div id="sidebar-content" tabIndex={-1} className={style.sidebarContent}>
             <Dropdown/>
           <FilterCheckbox />
-          {/* Add more sidebar items here */}
         </div>
       </div>
       {/* Main content */}

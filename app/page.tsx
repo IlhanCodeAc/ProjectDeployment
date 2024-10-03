@@ -29,7 +29,8 @@ async function Home({  searchParams }: Props) {
   console.log(orderBy);
 
   const fetchedProducts = await prisma.product.findMany({
-    orderBy: orderBy 
+    orderBy: orderBy, 
+    take:3
   });
 
   return (
