@@ -6,7 +6,6 @@ import Header from "./_components/Header/header";
 import Footer from "./_components/Footer/footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import "@uploadthing/react/styles.css";
-import prisma from "./lib/db";
  
  
 
@@ -32,7 +31,6 @@ export default async function  RootLayout({
   children: React.ReactNode;
 }>) {
   
-  const categories = await prisma.category.findMany()
   return (
     <ClerkProvider>
     <html lang="en" className={style.appHtml}>

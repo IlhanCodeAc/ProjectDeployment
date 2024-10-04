@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import style from './style.module.scss';
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
 const categories = ['FPS', 'RPG', 'Open World'];

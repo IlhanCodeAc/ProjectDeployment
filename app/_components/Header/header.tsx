@@ -10,7 +10,6 @@ import { ROLE } from '@prisma/client';
 import { RenderIf } from '../RenderIf/RenderIf';
 import prisma from '@/app/lib/db';
 import { auth } from '@clerk/nextjs/server';
-import Bars from './bars-solid.svg'
 
 interface HeaderProps {
   user?: {

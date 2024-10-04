@@ -18,16 +18,16 @@ import Swal from "sweetalert2";
 import { Product } from "@prisma/client";
 
 
-interface FormData {
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  sliderImageOne: string;
-  sliderImageTwo: string;
-  sliderImageThree: string;
-  gameplayVideo: string;
-}
+// interface FormData {
+//   name: string;
+//   description: string;
+//   price: number;
+//   image: string;
+//   sliderImageOne: string;
+//   sliderImageTwo: string;
+//   sliderImageThree: string;
+//   gameplayVideo: string;
+// }
 
 const Page = () => {
    const { register, handleSubmit, control, setValue } = useForm<Product>();
