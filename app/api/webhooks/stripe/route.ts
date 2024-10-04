@@ -1,31 +1,27 @@
-import { buffer } from 'node:stream/consumers';
-
-import { NextApiRequest } from 'next';
-import { headers } from 'next/headers';
-import { NextResponse } from 'next/server';
-import type { Stripe } from 'stripe';
 import { stripe } from '@/app/lib/stripe';
+import { headers } from 'next/headers';
+import { NextResponse, NextRequest } from 'next/server';
+import type { Stripe } from 'stripe';
 
-
-export async function POST(req: NextApiRequest) {
+export async function POST(req: NextRequest) {
   let event: Stripe.Event;
-  const rawBody = await buffer(req.body);
+
+  const rawBody = await req.arrayBuffer();
+  const buffer = Buffer.from(rawBody);
 
   try {
     event = stripe.webhooks.constructEvent(
-      rawBody,
+      buffer,
       headers().get('stripe-signature') as string,
       process.env.STRIPE_WEBHOOK_SECRET as string
     );
   } catch (err) {
     const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-    // On error, log and return the error message.
-    if (err! instanceof Error) console.log(err);
-    console.log(`❌ Error message: ${errorMessage}`);
+    console.error(err);
+    console.error(`❌ Error message: ${errorMessage}`);
     return NextResponse.json({ message: `Webhook Error: ${errorMessage}` }, { status: 400 });
   }
 
-  // Successfully constructed event.
   console.log('✅ Success:', event.id);
 
   const permittedEvents: string[] = [
@@ -55,10 +51,10 @@ export async function POST(req: NextApiRequest) {
           throw new Error(`Unhandled event: ${event.type}`);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return NextResponse.json({ message: 'Webhook handler failed' }, { status: 500 });
     }
   }
-  // Return a response to acknowledge receipt of the event.
+
   return NextResponse.json({ message: 'Received' }, { status: 200 });
 }
